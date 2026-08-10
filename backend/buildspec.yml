@@ -1,0 +1,40 @@
+version: 0.2
+
+env:
+  variables:
+    REPOSITORY_URI: "711699152383.dkr.ecr.ap-south-1.amazonaws.com/academiq-backend"
+    AWS_DEFAULT_REGION: "ap-south-1"
+
+phases:
+  install:
+    commands:
+      - echo "Preparing Docker build; dependencies are installed by backend/Dockerfile"
+
+  pre_build:
+    commands:
+      - |
+        if [ -z "$REPOSITORY_URI" ]; then
+          echo "ERROR: Set REPOSITORY_URI in the CodeBuild environment variables"
+          exit 1
+        fi
+      - REGISTRY_URI=$(echo "$REPOSITORY_URI" | cut -d'/' -f1)
+      - echo "Logging in to Amazon ECR"
+      - aws ecr get-login-password --region "$AWS_DEFAULT_REGION" | docker login --username AWS --password-stdin "$REGISTRY_URI"
+      - IMAGE_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION:-latest}
+      - IMAGE_TAG=$(echo "$IMAGE_TAG" | cut -c 1-40)
+
+  build:
+    commands:
+      - echo "Building backend Docker image"
+      - docker build --pull -t "$REPOSITORY_URI:$IMAGE_TAG" -t "$REPOSITORY_URI:latest" ./backend
+
+  post_build:
+    commands:
+      - echo "Pushing backend Docker image to ECR"
+      - docker push "$REPOSITORY_URI:$IMAGE_TAG"
+      - docker push "$REPOSITORY_URI:latest"
+      - printf '[{"name":"backend","imageUri":"%s"}]' "$REPOSITORY_URI:$IMAGE_TAG" > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
