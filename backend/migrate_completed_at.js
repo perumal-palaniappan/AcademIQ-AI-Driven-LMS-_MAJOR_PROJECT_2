@@ -1,6 +1,5 @@
 const pool = require('./db');
 
-
 const updateTable = async () => {
     try {
         await pool.query('ALTER TABLE enrollments ADD COLUMN IF NOT EXISTS completed_at TIMESTAMP');
