@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: "711699152383.dkr.ecr.ap-south-2.amazonaws.com/academiq-be-repo"
+    REPOSITORY_URI: "711699152383.dkr.ecr.ap-south-1.amazonaws.com/academiq-be-repo"
     AWS_DEFAULT_REGION: "ap-south-1"
 
 phases:
