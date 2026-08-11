@@ -6,7 +6,7 @@ WORKDIR /app
 
 # copying the package.json and install once the production based packages
 COPY package*.json ./
-RUN npm ci --omit=dev && npm cache clean --force
+RUN npm ci --omit=dev --verbose && npm cache clean --force
 
 # copy the source files here
 COPY . .
