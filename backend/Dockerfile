@@ -5,7 +5,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # copying the package.json and install once the production based packages
-COPY package*.json ./
+COPY package*.json .
 RUN npm ci --omit=dev --verbose && npm cache clean --force
 
 # copy the source files here
