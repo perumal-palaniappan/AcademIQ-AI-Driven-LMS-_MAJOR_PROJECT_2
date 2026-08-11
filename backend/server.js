@@ -6,6 +6,7 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 const passport = require('./config/passport');
+const pool = require('./db');
 
 const authRoutes = require('./routes/auth');
 const courseRoutes = require('./routes/courses');
@@ -45,8 +46,22 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'Server is running', timestamp: new Date().toISOString() });
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-    console.log(`Database: ${process.env.DB_NAME}`);
-});
+// Verify the database before accepting API traffic.
+const startServer = async () => {
+    try {
+        await pool.verifyConnection();
+        console.log(`Database connection established: ${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`);
+
+        app.listen(PORT, () => {
+            console.log(`Server is running on http://localhost:${PORT}`);
+            console.log(`Database: ${process.env.DB_NAME}`);
+        });
+    } catch (error) {
+        console.error('Database connection failed. Check DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD, and RDS security-group access.');
+        console.error(error.message);
+        await pool.end();
+        process.exit(1);
+    }
+};
+
+startServer();

@@ -8,6 +8,15 @@ const pool = new Pool({
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
+    connectionTimeoutMillis: 5000,
+    // RDS requires SSL by default; set DB_SSL=false only for a local non-SSL database.
+    ssl: process.env.DB_SSL !== 'false'
+        ? { rejectUnauthorized: false }
+        : false,
 });
+
+pool.verifyConnection = async () => {
+    await pool.query('SELECT 1');
+};
 
 module.exports = pool;
