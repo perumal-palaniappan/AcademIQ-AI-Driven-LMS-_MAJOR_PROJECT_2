@@ -4,8 +4,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const passport = require('./config/passport');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
+const passport = require('./config/passport');
 
 const authRoutes = require('./routes/auth');
 const courseRoutes = require('./routes/courses');
