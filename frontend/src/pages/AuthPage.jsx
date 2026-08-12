@@ -336,7 +336,7 @@ const AuthPage = () => {
 
                     <div className="grid grid-cols-2 gap-4">
                         <button
-                            onClick={() => window.location.href = 'http://localhost:5000/api/auth/google'}
+                            onClick={() => window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`}
                             className="flex items-center justify-center gap-2 py-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors"
                         >
                             <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -360,7 +360,7 @@ const AuthPage = () => {
                             <span className="font-medium text-gray-700">Google</span>
                         </button>
                         <button
-                            onClick={() => window.location.href = 'http://localhost:5000/api/auth/github'}
+                            onClick={() => window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/github`}
                             className="flex items-center justify-center gap-2 py-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors"
                         >
                             <Github className="w-5 h-5 text-gray-800" />

@@ -58,7 +58,7 @@ const Settings = () => {
                 return;
             }
 
-            const response = await axios.delete('http://localhost:5000/api/auth/delete-account', {
+            const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/auth/delete-account`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -103,7 +103,7 @@ const Settings = () => {
                 return;
             }
 
-            const response = await axios.put('http://localhost:5000/api/auth/change-password', {
+            const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/auth/change-password`, {
                 currentPassword: passwords.current,
                 newPassword: passwords.new
             }, {

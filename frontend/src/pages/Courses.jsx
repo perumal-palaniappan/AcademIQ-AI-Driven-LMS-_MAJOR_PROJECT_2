@@ -217,7 +217,7 @@ const InstructorCourseManager = ({ user }) => {
         if (!imagePath) return null;
         if (imagePath.startsWith('data:')) return imagePath; // Base64
         if (imagePath.startsWith('http')) return imagePath; // External URL
-        return `http://localhost:5000${imagePath}`; // Backend local file
+        return `${import.meta.env.VITE_BACKEND_URL}${imagePath}`; // Backend local file
     };
 
     const handleStartCreate = () => {
@@ -1324,7 +1324,7 @@ const StudentCourseView = ({ user }) => {
         if (!imagePath) return null;
         if (imagePath.startsWith('data:')) return imagePath;
         if (imagePath.startsWith('http')) return imagePath;
-        return `http://localhost:5000${imagePath}`;
+        return `${import.meta.env.VITE_BACKEND_URL}${imagePath}`;
     };
 
     if (view === 'player') {

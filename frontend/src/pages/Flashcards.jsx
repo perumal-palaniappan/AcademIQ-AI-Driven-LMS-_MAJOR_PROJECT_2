@@ -108,7 +108,7 @@ const Flashcards = () => {
     const fetchHistory = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/flashcards/history', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/flashcards/history`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -128,7 +128,7 @@ const Flashcards = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/flashcards/generate', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/flashcards/generate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -192,7 +192,7 @@ const Flashcards = () => {
         if (!deckToDelete) return;
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/flashcards/deck/${deckToDelete}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/flashcards/deck/${deckToDelete}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

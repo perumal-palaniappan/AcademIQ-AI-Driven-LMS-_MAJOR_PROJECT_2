@@ -28,4 +28,5 @@ pnpm-debug.log*
 # Database/Debug
 *.txt
 *.sql
+!backend/table.sql
 !init.sql

@@ -102,7 +102,7 @@ const AINotes = () => {
     const fetchHistory = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/ai/history', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/ai/history`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -123,7 +123,7 @@ const AINotes = () => {
         setAiResponse('');
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/api/ai/generate-notes', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/ai/generate-notes`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -163,7 +163,7 @@ const AINotes = () => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/api/ai/history/${idToDelete}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/ai/history/${idToDelete}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

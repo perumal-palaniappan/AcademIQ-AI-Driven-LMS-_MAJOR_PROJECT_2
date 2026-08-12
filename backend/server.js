@@ -16,7 +16,6 @@ const quizRoutes = require('./routes/quizzes');
 const aiRoutes = require('./routes/ai');
 const flashcardRoutes = require('./routes/flashcards');
 const instructorRoutes = require('./routes/instructor');
-const deploymentTestRoutes = require('./routes/deploymentTest');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -38,7 +37,6 @@ app.use('/api/quizzes', quizRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/flashcards', flashcardRoutes);
 app.use('/api/instructor', instructorRoutes);
-app.use('/api/deployment-test', deploymentTestRoutes);
 
 
 // Health check route

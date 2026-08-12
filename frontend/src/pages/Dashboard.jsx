@@ -113,8 +113,8 @@ const Dashboard = () => {
     const fetchLearningActivity = async (userId, type, range, role) => {
         try {
             const endpoint = role === 'instructor'
-                ? `http://localhost:5000/api/instructor/activity?instructorId=${userId}&type=${type}&range=${range}`
-                : `http://localhost:5000/api/student/learning-activity?userId=${userId}&type=${type}&range=${range}`;
+                ? `${import.meta.env.VITE_API_BASE_URL}/instructor/activity?instructorId=${userId}&type=${type}&range=${range}`
+                : `${import.meta.env.VITE_API_BASE_URL}/student/learning-activity?userId=${userId}&type=${type}&range=${range}`;
 
             const response = await fetch(endpoint);
             if (response.ok) {
@@ -130,8 +130,8 @@ const Dashboard = () => {
         setLoadingStats(true);
         try {
             const endpoint = role?.toLowerCase() === 'instructor'
-                ? `http://localhost:5000/api/instructor/stats?instructorId=${userId}`
-                : `http://localhost:5000/api/student/stats?userId=${userId}`;
+                ? `${import.meta.env.VITE_API_BASE_URL}/instructor/stats?instructorId=${userId}`
+                : `${import.meta.env.VITE_API_BASE_URL}/student/stats?userId=${userId}`;
 
             const response = await fetch(endpoint);
             if (response.ok) {
@@ -147,7 +147,7 @@ const Dashboard = () => {
 
     const fetchInProgressCourses = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/student/courses?userId=${userId}&filter=in_progress`);
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/student/courses?userId=${userId}&filter=in_progress`);
             if (response.ok) {
                 const data = await response.json();
                 setInProgressCourses(data.courses || []);
@@ -159,7 +159,7 @@ const Dashboard = () => {
 
     const fetchInstructorCourses = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/instructor/recent-courses?instructorId=${userId}`);
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/instructor/recent-courses?instructorId=${userId}`);
             if (response.ok) {
                 const data = await response.json();
                 setInstructorCourses(data.courses || []);
@@ -627,7 +627,7 @@ const Dashboard = () => {
                                     .map((course) => (
                                         <CourseCard
                                             key={course.id}
-                                            image={course.banner_image ? (course.banner_image.startsWith('http') ? course.banner_image : `http://localhost:5000${course.banner_image}`) : "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
+                                            image={course.banner_image ? (course.banner_image.startsWith('http') ? course.banner_image : `${import.meta.env.VITE_BACKEND_URL}${course.banner_image}`) : "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"}
                                             category={user.role?.toLowerCase() === 'instructor' ? (course.status?.charAt(0).toUpperCase() + course.status?.slice(1)) : (course.instructor_name || "Instructor")}
                                             title={course.title}
                                             code={`#${course.id}`}

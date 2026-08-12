@@ -116,7 +116,7 @@ const SuperAdminDashboard = () => {
     const fetchUserGrowth = async () => {
         setLoadingUserGrowth(true);
         try {
-            const response = await fetch(`http://localhost:5000/api/analytics/user-growth?days=${userGrowthDays}`);
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/analytics/user-growth?days=${userGrowthDays}`);
             if (response.ok) {
                 const data = await response.json();
                 setUserGrowthData(data);
@@ -131,7 +131,7 @@ const SuperAdminDashboard = () => {
     const fetchCourseGrowth = async () => {
         setLoadingCourseGrowth(true);
         try {
-            const response = await fetch(`http://localhost:5000/api/analytics/course-growth?days=${courseGrowthDays}&status=${courseGrowthStatus}`);
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/analytics/course-growth?days=${courseGrowthDays}&status=${courseGrowthStatus}`);
             if (response.ok) {
                 const data = await response.json();
                 setCourseGrowthData(data);
@@ -149,7 +149,7 @@ const SuperAdminDashboard = () => {
 
     const fetchCourses = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/courses');
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/courses`);
             if (response.ok) {
                 const data = await response.json();
                 // Handle both array and object responses
@@ -167,7 +167,7 @@ const SuperAdminDashboard = () => {
 
     const handleUpdateCourseStatus = async (courseId, status) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/courses/${courseId}/status`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/courses/${courseId}/status`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -191,7 +191,7 @@ const SuperAdminDashboard = () => {
 
     const fetchQuizzes = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/quizzes');
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/quizzes`);
             if (response.ok) {
                 const data = await response.json();
                 // Handle both array and object responses
@@ -209,7 +209,7 @@ const SuperAdminDashboard = () => {
 
     const handleUpdateQuizStatus = async (quizId, status) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/quizzes/${quizId}/status`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/quizzes/${quizId}/status`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -239,7 +239,7 @@ const SuperAdminDashboard = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/auth/users');
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/users`);
             if (response.ok) {
                 const data = await response.json();
                 const usersList = Array.isArray(data) ? data : [];
@@ -263,7 +263,7 @@ const SuperAdminDashboard = () => {
         if (!deleteId) return;
 
         try {
-            const response = await fetch(`http://localhost:5000/api/auth/users/${deleteId}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/users/${deleteId}`, {
                 method: 'DELETE'
             });
 
@@ -1229,7 +1229,7 @@ const UserRow = ({ id, name, email, role, createdAt, avatar, onDelete }) => {
 
 const CourseCard = ({ course, onUpdateStatus }) => {
     const bannerUrl = course.banner_image
-        ? (course.banner_image.startsWith('http') ? course.banner_image : `http://localhost:5000${course.banner_image}`)
+        ? (course.banner_image.startsWith('http') ? course.banner_image : `${import.meta.env.VITE_BACKEND_URL}${course.banner_image}`)
         : "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
 
     const getStatusStyles = (status) => {
