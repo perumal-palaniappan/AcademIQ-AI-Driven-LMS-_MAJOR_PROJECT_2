@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: "711699152383.dkr.ecr.ap-south-1.amazonaws.com/lms-repo"
+    REPOSITORY_URI: "711699152383.dkr.ecr.ap-south-1.amazonaws.com/lms-backend"
     AWS_DEFAULT_REGION: "ap-south-1"
 
 phases:
