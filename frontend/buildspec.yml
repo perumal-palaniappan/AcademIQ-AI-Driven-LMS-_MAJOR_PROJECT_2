@@ -7,6 +7,6 @@ phases:
             - chmod 400 "sabari-pem.pem"
             - mkdir -p ~/.ssh 
             - ssh-keyscan -H ec2-3-110-101-160.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
-            - ssh -i "sabari-pem.pem" ec2-user@ec2-3-110-101-160.ap-south-1.compute.amazonaws.com "cd / && sudo mkdir -p /home/frontend && sudo chmod ec2-user:ec2-user /home/frontend"
+            - ssh -i "sabari-pem.pem" ec2-user@ec2-3-110-101-160.ap-south-1.compute.amazonaws.com "cd / && sudo mkdir -p /home/frontend && sudo chown ec2-user:ec2-user /home/frontend"
             - scp -i "sabari-pem.pem" -r frontend/dist ec2-user@ec2-3-110-101-160.ap-south-1.compute.amazonaws.com:/home/frontend/
             - echo scp done successfully
