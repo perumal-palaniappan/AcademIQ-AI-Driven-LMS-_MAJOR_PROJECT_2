@@ -1,0 +1,10 @@
+version: 0.2
+
+build:
+    commands:
+          - echo scp stared
+          - chmod 400 "sabari-pem.pem"
+          - mkdir -p ~/.ssh 
+          - ssh-keyscan -H ec2-3-110-101-160.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+          - scp -i "sabari-pem.pem" -r frontend/dist ec2-user@ec2-3-110-101-160.ap-south-1.compute.amazonaws.com:/home/frontend/
+          - echo scp done successfully
