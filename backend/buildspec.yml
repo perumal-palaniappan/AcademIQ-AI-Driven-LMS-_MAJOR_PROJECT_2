@@ -34,7 +34,4 @@ phases:
       - docker push "$REPOSITORY_URI:$IMAGE_TAG"
       - docker push "$REPOSITORY_URI:latest"
       - echo "Triggering ECS deployment"
-      - aws ecs update-service \
-        --cluster be-cluster \
-        --service be-task-definition-service-lhqfwuxz \
-        --force-new-deployment
+      - aws ecs update-service --cluster be-cluster --service be-task-definition-service-lhqfwuxz --force-new-deployment
