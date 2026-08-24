@@ -1,7 +1,3 @@
--- LMS backend schema for PostgreSQL / Amazon RDS PostgreSQL.
--- Run this file while connected to the application database.
--- It is idempotent for a fresh database: running it again will not remove data.
-
 BEGIN;
 
 CREATE TABLE IF NOT EXISTS users (
