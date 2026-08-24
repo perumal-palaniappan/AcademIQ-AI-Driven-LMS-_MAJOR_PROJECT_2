@@ -16,3 +16,5 @@ EXPOSE 5000
 
 # start command
 CMD ["npm", "start"]
+
+
