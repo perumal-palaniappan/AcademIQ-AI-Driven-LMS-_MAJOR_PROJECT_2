@@ -10,23 +10,23 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
 
   build:
     commands:
       - echo Build started
-
-      - docker build -t frontend .
-
-      - docker tag frontend:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
+      - docker build \
+        --platform linux/amd64 \
+        --pull \
+        -f frontend/Dockerfile \
+        -t "$REPOSITORY_URI:$IMAGE_TAG" \
+        -t "$REPOSITORY_URI:latest" \
+        ./frontend
 
   post_build:
     commands:
       - echo Pushing image...
-
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-
       - echo Build completed
 
 
