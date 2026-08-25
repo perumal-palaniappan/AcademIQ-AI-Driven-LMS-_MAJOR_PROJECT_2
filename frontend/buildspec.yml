@@ -2,7 +2,7 @@ version: 0.2
 env:
   variables:
     AWS_DEFAULT_REGION: ap-south-1
-    REPOSITORY_URI: 696263047337.dkr.ecr.ap-south-1.amazonaws.com/fe-lms-repo
+    REPOSITORY_URI: 696263047337.dkr.ecr.ap-south-1.amazonaws.com/frontend-repo
     IMAGE_TAG: latest
 
 phases:
@@ -24,7 +24,7 @@ phases:
       - docker push "$REPOSITORY_URI:latest"
       - echo Build completed
       - echo "Triggering ECS deployment"
-      - aws ecs update-service --cluster lms-cluster --service fe-task-service --force-new-deployment
+      - aws ecs update-service --cluster lms-cluster --service frontend-task-service --force-new-deployment
 
 
 

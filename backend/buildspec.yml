@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: "696263047337.dkr.ecr.ap-south-1.amazonaws.com/be-lms-repo"
+    REPOSITORY_URI: "696263047337.dkr.ecr.ap-south-1.amazonaws.com/backend-repo"
     AWS_DEFAULT_REGION: "ap-south-1"
 
 phases:
@@ -35,4 +35,4 @@ phases:
       - docker push "$REPOSITORY_URI:latest"
       # This is for CD purpose
       - echo "Triggering ECS deployment"
-      - aws ecs update-service --cluster lms-cluster --service be-task-service --force-new-deployment
+      - aws ecs update-service --cluster lms-cluster --service backend-task-service --force-new-deployment
