@@ -23,6 +23,8 @@ phases:
       - docker push "$REPOSITORY_URI:$IMAGE_TAG"
       - docker push "$REPOSITORY_URI:latest"
       - echo Build completed
+      - echo "Triggering ECS deployment"
+      - aws ecs update-service --cluster lms-cluster --service fe-task-service --force-new-deployment
 
 
 
