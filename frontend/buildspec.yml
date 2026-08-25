@@ -15,18 +15,13 @@ phases:
   build:
     commands:
       - echo Build started
-      - docker build \
-        --platform linux/amd64 \
-        --pull \
-        -f frontend/Dockerfile \
-        -t "$REPOSITORY_URI:$IMAGE_TAG" \
-        -t "$REPOSITORY_URI:latest" \
-        ./frontend
+      - docker build --platform linux/amd64 --pull -f frontend/Dockerfile -t "$REPOSITORY_URI:$IMAGE_TAG" -t "$REPOSITORY_URI:latest" ./frontend
 
   post_build:
     commands:
       - echo Pushing image...
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker push "$REPOSITORY_URI:$IMAGE_TAG"
+      - docker push "$REPOSITORY_URI:latest"
       - echo Build completed
 
 
