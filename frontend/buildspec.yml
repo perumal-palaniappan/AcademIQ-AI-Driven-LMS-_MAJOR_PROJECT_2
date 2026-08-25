@@ -1,12 +1,43 @@
 version: 0.2
+env:
+  variables:
+    AWS_DEFAULT_REGION: ap-south-1
+    REPOSITORY_URI: 696263047337.dkr.ecr.ap-south-1.amazonaws.com/fe-lms-repo
+    IMAGE_TAG: latest
 
 phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
+
   build:
-      commands:
-            - echo scp stared
-            - chmod 400 "sabari-pem.pem"
-            - mkdir -p ~/.ssh 
-            - ssh-keyscan -H ec2-3-110-101-160.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
-            - ssh -i "sabari-pem.pem" ec2-user@ec2-3-110-101-160.ap-south-1.compute.amazonaws.com "cd / && sudo mkdir -p /home/frontend && sudo chown ec2-user:ec2-user /home/frontend"
-            - scp -i "sabari-pem.pem" -r frontend/dist ec2-user@ec2-3-110-101-160.ap-south-1.compute.amazonaws.com:/home/frontend/
-            - echo scp done successfully
+    commands:
+      - echo Build started
+
+      - docker build -t frontend .
+
+      - docker tag frontend:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
+
+  post_build:
+    commands:
+      - echo Pushing image...
+
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+
+      - echo Build completed
+
+
+# This is for manual deployment
+# phases:
+#   build:
+#       commands:
+#             - echo scp stared
+#             - chmod 400 "sabari-pem.pem"
+#             - mkdir -p ~/.ssh 
+#             - ssh-keyscan -H ec2-3-110-101-160.ap-south-1.compute.amazonaws.com >> ~/.ssh/known_hosts
+#             - ssh -i "sabari-pem.pem" ec2-user@ec2-3-110-101-160.ap-south-1.compute.amazonaws.com "cd / && sudo mkdir -p /home/frontend && sudo chown ec2-user:ec2-user /home/frontend"
+#             - scp -i "sabari-pem.pem" -r frontend/dist ec2-user@ec2-3-110-101-160.ap-south-1.compute.amazonaws.com:/home/frontend/
+#             - echo scp done successfully
