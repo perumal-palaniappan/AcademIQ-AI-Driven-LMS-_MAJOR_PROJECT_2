@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: "696263047337.dkr.ecr.ap-south-1.amazonaws.com/lms-repo"
+    REPOSITORY_URI: "696263047337.dkr.ecr.ap-south-1.amazonaws.com/be-lms-repo"
     AWS_DEFAULT_REGION: "ap-south-1"
 
 phases:
@@ -33,5 +33,6 @@ phases:
       - echo "Pushing backend Docker image to ECR"
       - docker push "$REPOSITORY_URI:$IMAGE_TAG"
       - docker push "$REPOSITORY_URI:latest"
+      # This is for CD purpose
       - echo "Triggering ECS deployment"
-      - aws ecs update-service --cluster be-cluster --service be-task-definition-service-lhqfwuxz --force-new-deployment
+      - aws ecs update-service --cluster be-lms-cluster --service be-lms-task1-service --force-new-deployment
