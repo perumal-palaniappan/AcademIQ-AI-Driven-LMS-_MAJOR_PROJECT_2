@@ -35,4 +35,4 @@ phases:
       - docker push "$REPOSITORY_URI:latest"
       # This is for CD purpose
       - echo "Triggering ECS deployment"
-      - aws ecs update-service --cluster be-lms-cluster --service be-lms-task1-service --force-new-deployment
+      - aws ecs update-service --cluster lms-cluster --service be-task-service --force-new-deployment
