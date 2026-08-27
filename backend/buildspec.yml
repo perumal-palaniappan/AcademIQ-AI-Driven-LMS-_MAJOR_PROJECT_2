@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: "696263047337.dkr.ecr.ap-south-1.amazonaws.com/backend-repo"
+    REPOSITORY_URI: "696263047337.dkr.ecr.ap-south-1.amazonaws.com/backend_registry"
     AWS_DEFAULT_REGION: "ap-south-1"
 
 phases:
