@@ -38,8 +38,8 @@ phases:
       - printf '[{"name":"backend","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
       # This is for CD purpose
-      # - echo "Triggering ECS deployment"
-      # - aws ecs update-service --cluster tf-created-cluster --service tf-created-be-service --force-new-deployment
+      - echo "Triggering ECS deployment"
+      - aws ecs update-service --cluster tf-created-cluster --service tf-created-be-service --force-new-deployment
 
 artifacts:
   files:
