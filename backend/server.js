@@ -28,6 +28,11 @@ app.use(passport.initialize());
 // Serve static files
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
+// Public welcome endpoint (no authentication or other restrictions)
+app.get('/api/welcome', (req, res) => {
+    res.send('Hi, Welcome!!');
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
