@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: $AWS_REPOSITORY_URI
+    # REPOSITORY_URI: 
     AWS_DEFAULT_REGION: "ap-south-1"
 
 phases:
@@ -12,6 +12,7 @@ phases:
 
   pre_build:
     commands:
+      - REPOSITORY_URI=$AWS_REPOSITORY_URI
       - |
         if [ -z "$REPOSITORY_URI" ]; then
           echo "ERROR: Set REPOSITORY_URI in the CodeBuild environment variables"
