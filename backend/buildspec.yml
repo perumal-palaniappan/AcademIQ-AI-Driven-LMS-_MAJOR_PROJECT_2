@@ -12,8 +12,8 @@ phases:
 
   pre_build:
     commands:
-      # define repository URI here when we use terraform(don't define under env)
-      - REPOSITORY_URI= $AWS_REPOSITORY_URI
+    # define repository URI here when we use terraform(don't define under env)
+      - REPOSITORY_URI=$AWS_REPOSITORY_URI
       - |
         if [ -z "$REPOSITORY_URI" ]; then
           echo "ERROR: Set REPOSITORY_URI in the CodeBuild environment variables"
