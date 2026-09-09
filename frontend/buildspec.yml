@@ -2,14 +2,14 @@ version: 0.2
 env:
   variables:
     AWS_DEFAULT_REGION: ap-south-1
-    # REPOSITORY_URI: 696263047337.dkr.ecr.ap-south-1.amazonaws.com/frontend-repo
+    REPOSITORY_URI: 696263047337.dkr.ecr.ap-south-1.amazonaws.com/frontend-repo
     IMAGE_TAG: latest
 
 phases:
   pre_build:
     commands:
     # define repository URI here when we use terraform(don't define under env)
-      - REPOSITORY_URI=$AWS_REPOSITORY_URI
+      # - REPOSITORY_URI=$AWS_REPOSITORY_URI
       - echo Logging in to Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI

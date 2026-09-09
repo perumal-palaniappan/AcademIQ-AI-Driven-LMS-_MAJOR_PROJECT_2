@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    # REPOSITORY_URI: "711699152383.dkr.ecr.ap-south-1.amazonaws.com/be-lms-ecr"
+    REPOSITORY_URI: "711699152383.dkr.ecr.ap-south-1.amazonaws.com/pipeline-be-repo"
     AWS_DEFAULT_REGION: "ap-south-1"
 
 phases:
@@ -13,7 +13,7 @@ phases:
   pre_build:
     commands:
     # define repository URI here when we use terraform(don't define under env)
-      - REPOSITORY_URI=$AWS_REPOSITORY_URI
+      # - REPOSITORY_URI=$AWS_REPOSITORY_URI
       - |
         if [ -z "$REPOSITORY_URI" ]; then
           echo "ERROR: Set REPOSITORY_URI in the CodeBuild environment variables"
@@ -39,7 +39,7 @@ phases:
       - cat imagedefinitions.json
       # This is for CD purpose
       - echo "Triggering ECS deployment"
-      - aws ecs update-service --cluster tf-created-cluster --service tf-created-be-service --force-new-deployment
+      - aws ecs update-service --cluster pipeline-cluster --service pipeline-be-service --force-new-deployment
 
 artifacts:
   files:
