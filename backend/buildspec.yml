@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: "711699152383.dkr.ecr.ap-south-1.amazonaws.com/pipeline-be-repo"
+    REPOSITORY_URI: "711699152383.dkr.ecr.ap-south-1.amazonaws.com/kb-be-repo"
     AWS_DEFAULT_REGION: "ap-south-1"
 
 phases:
@@ -38,10 +38,10 @@ phases:
       - printf '[{"name":"backend","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
       # This is for CD purpose
-      - echo "Triggering ECS deployment"
-      - aws ecs update-service --cluster pipeline-cluster --service pipeline-be-service --force-new-deployment
+      # - echo "Triggering ECS deployment"
+      # - aws ecs update-service --cluster pipeline-cluster --service pipeline-be-service --force-new-deployment
 
-artifacts:
-  files:
-    - imagedefinitions.json
+# artifacts:
+#   files:
+#     - imagedefinitions.json
       
