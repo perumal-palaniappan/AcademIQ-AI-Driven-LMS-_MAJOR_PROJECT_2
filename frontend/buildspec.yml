@@ -2,7 +2,7 @@ version: 0.2
 env:
   variables:
     AWS_DEFAULT_REGION: ap-south-1
-    REPOSITORY_URI: 711699152383.dkr.ecr.ap-south-1.amazonaws.com/eks-fe-repo
+    REPOSITORY_URI: 711699152383.dkr.ecr.ap-south-1.amazonaws.com/fe-k8-repo
     IMAGE_TAG: latest
 
 phases:
